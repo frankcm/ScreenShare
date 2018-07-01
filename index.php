@@ -46,7 +46,9 @@
 	echo "<div class='sessionlist'>active sessions...<br/>";
 	if(mysql_num_rows($res)){
 		while($row=mysql_fetch_assoc($res)){
-			echo "<a href='?token=$row[token]'>$row[token]</a><br/>";
+			$itsme="";
+			if($_GET['token']==$row['token'])$itsme=" (this is you )";
+			echo "<a href='?token=$row[token]'>$row[token]</a>$itsme<br/>";
 		}
 		
 	}
@@ -58,7 +60,7 @@
 
 ?>
 <table border=1 class='colorselect'><tr><td><input type=button value=black /><input type=button value=red /><input type=button value=blue /><input type=button value=yellow /></td></tr></table>
-
+<div>Click and drag your mouse in the gray area.  You can open another browser window to <a href='?token=<?=$_GET['token']?>'>Here</a> to see that it is being shared over the network. You can also select a different color above.</div> 
 <style type='text/css'>
 .colorselect{margin:auto;}
 .colorselect input{display:block;}
